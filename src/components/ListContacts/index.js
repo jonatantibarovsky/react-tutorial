@@ -13,17 +13,32 @@ class ListContacts extends Component {
     this.fetchData()
   }
 
+
   fetchData = () => {
+    const query = `
+      query {
+        contacts {
+          id
+          name
+          email
+        }
+      }
+    `
+
     this.setState({ loading: true }, () => {
       fetch('http://localhost:3001/', {
-        method: 'GET',
+        method: 'POST',
         headers: {
           'Content-Type': 'application/json'
-        }
+        },
+        body: JSON.stringify({ query })
       })
       .then(res => {
-        res.json()
-        console.log(res)
+        const result = res.json()
+        .then(response => {
+          this.setState({ data: response})
+          console.log(this.state.data)
+        })
       })
       .catch(error => console.log(error))
     })
@@ -32,7 +47,7 @@ class ListContacts extends Component {
   render() {
     return (
       <div className="App">
-        <h1>hi</h1>
+        
       </div>
     );
   }
