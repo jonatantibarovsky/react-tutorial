@@ -6,6 +6,7 @@ function ViewContact() {
   console.log(id)
   return (
     <div className="App">
+      
     </div>
   );
 }
