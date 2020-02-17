@@ -5,26 +5,28 @@ class AddContact extends Component {
 
   state = {
     loading: false,
-    data: null
+    data: null,
+    name: "",
+    email: ""
   }
 
-  componentDidMount() {
-    this.fetchData()
-  }
-
-
+  // https://graphql.org/graphql-js/mutations-and-input-types/
   fetchData = () => {
     const query = `
       mutation addContact($contact: InputContact) {
         addContact(contact: $contact) {
           id
+          name
+          email
         }
       }
     `
+
     const name = 'first last'
     const email = 'email@gmail.com'
 
     this.setState({ loading: true }, () => {
+      console.log('fetching')
       fetch('http://localhost:3001/', {
         method: 'POST',
         headers: {
@@ -40,13 +42,8 @@ class AddContact extends Component {
           }
         })
       })
-      .then(res => {
-        const result = res.json()
-        .then(response => {
-          this.setState({ data: response})
-          console.log(this.state.data)
-        })
-      })
+      .then(res => res.json())
+      .then(data => console.log(data))
       .catch(error => console.log(error))
     })
   }
@@ -55,14 +52,15 @@ class AddContact extends Component {
   render() {
     return (
       <div className="App">
-          <h1>hi</h1>
-          <Input placeholder='Contact Name' />
-          <Input placeholder='Email' />
-          <Input placeholder='Date Modified' />
-          <Input placeholder='Date Created' />
+          <h1>add contact</h1>
       </div>
     );
   }
 }
 
 export default AddContact;
+/* 
+<Input placeholder='Contact Name' />
+          <Input placeholder='Email' />
+          <Input placeholder='Date Modified' />
+          <Input placeholder='Date Created' /> */

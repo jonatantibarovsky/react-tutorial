@@ -4,7 +4,7 @@ class EditContact extends Component {
   render() {
     return (
       <div className="App">
-        <h1>hi</h1>
+        <h1>edit contact</h1>
       </div>
     );
   }

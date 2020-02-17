@@ -47,7 +47,7 @@ class ListContacts extends Component {
   render() {
     return (
       <div className="App">
-        
+        list contacts
       </div>
     );
   }

@@ -4,6 +4,7 @@ class DeleteContact extends Component {
   render() {
     return (
       <div className="App">
+        delete contact
       </div>
     );
   }

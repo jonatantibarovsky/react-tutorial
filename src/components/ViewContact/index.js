@@ -9,7 +9,7 @@ function ViewContact() {
   const [loading, setLoading] = useState(false)
   const [data, setData] = useState(null)
 
-  useEffect(() => {
+  /* useEffect(() => {
     const query = `
       query {
         contacts(id: ${id}) {
@@ -35,11 +35,11 @@ function ViewContact() {
       })
     })
     .catch(error => console.log(error))
-  }, [])
+  }, []) */
 
     return (
       <div className="App">
-      
+      view contact
       </div>
     )
   
