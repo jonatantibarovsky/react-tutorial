@@ -5,7 +5,6 @@ class AddContact extends Component {
 
   state = {
     loading: false,
-    data: null,
     name: "",
     email: ""
   }
@@ -52,15 +51,16 @@ class AddContact extends Component {
   render() {
     return (
       <div className="App">
-          <h1>add contact</h1>
+          <h1>
+            <Input placeholder='Contact Name' />
+            <Input placeholder='Email' />
+            <Input placeholder='Date Modified' />
+            <Input placeholder='Date Created' /> */
+          </h1>
       </div>
     );
   }
 }
 
 export default AddContact;
-/* 
-<Input placeholder='Contact Name' />
-          <Input placeholder='Email' />
-          <Input placeholder='Date Modified' />
-          <Input placeholder='Date Created' /> */
+

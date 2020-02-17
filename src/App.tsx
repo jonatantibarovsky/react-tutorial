@@ -69,9 +69,6 @@ class App extends Component {
             <Route path="/contact/all">
               <ListContacts />
             </Route>
-            <Route path="/contact/:id">
-              <ViewContacts />
-            </Route>
             <Route path="/contact/edit">
               <EditContact />
             </Route>
@@ -80,6 +77,10 @@ class App extends Component {
             </Route>
             <Route path="/contact/add">
               <AddContact />
+            </Route>
+            // /:id part recognized every string after the /
+            <Route path="/contact/:id">
+              <ViewContacts />
             </Route>
           </Switch>
         </div>
