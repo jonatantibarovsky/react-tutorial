@@ -12,28 +12,45 @@ class AddContact extends Component {
     this.fetchData()
   }
 
+
   fetchData = () => {
+    const query = `
+      mutation addContact($contact: InputContact) {
+        addContact(contact: $contact) {
+          id
+        }
+      }
+    `
+    const name = 'first last'
+    const email = 'email@gmail.com'
+
     this.setState({ loading: true }, () => {
       fetch('http://localhost:3001/', {
-        method: 'GET',
+        method: 'POST',
         headers: {
           'Content-Type': 'application/json'
         },
         body: JSON.stringify({
-          query: `{
-            contact {
-              id
-              name
+          query,
+          variables: {
+            contact: {
+              name,
               email
             }
-          }`
+          }
         })
       })
-      .then(response => response.json())
-      .then(response => console.log())
-
+      .then(res => {
+        const result = res.json()
+        .then(response => {
+          this.setState({ data: response})
+          console.log(this.state.data)
+        })
+      })
+      .catch(error => console.log(error))
     })
   }
+
 
   render() {
     return (
