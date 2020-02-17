@@ -45,11 +45,12 @@ class AddContact extends Component {
     })
   }
 
-  handleChange = (event) => {
+  handleChange = (event, a) => {
+    console.log(event, a)
     this.setState({
       value: event.target.value
     })
-    console.log(event)
+    console.log(this.state)
   }
 
 
@@ -59,13 +60,11 @@ class AddContact extends Component {
         <form>
             <Input 
               placeholder='Contact Name' 
-              onChange = {this.handleChange}
-              value = {this.state.name}
+              onChange = {(e) => this.handleChange(e, 'asd')}
             />
             <Input 
               placeholder='Email' 
               onChange = {this.handleChange}
-              value = {this.state.email}
             />
             <Input 
               placeholder='Date Modified' 
