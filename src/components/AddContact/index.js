@@ -20,9 +20,7 @@ class AddContact extends Component {
         }
       }
     `
-
-    const name = 'first last'
-    const email = 'email@gmail.com'
+    const { name, email } = this.state
 
     this.setState({ loading: true }, () => {
       console.log('fetching')
@@ -47,16 +45,35 @@ class AddContact extends Component {
     })
   }
 
+  handleChange = (event) => {
+    this.setState({
+      value: event.target.value
+    })
+    console.log(event)
+  }
+
 
   render() {
     return (
       <div className="App">
-          <h1>
-            <Input placeholder='Contact Name' />
-            <Input placeholder='Email' />
-            <Input placeholder='Date Modified' />
-            <Input placeholder='Date Created' /> */
-          </h1>
+        <form>
+            <Input 
+              placeholder='Contact Name' 
+              onChange = {this.handleChange}
+              value = {this.state.name}
+            />
+            <Input 
+              placeholder='Email' 
+              onChange = {this.handleChange}
+              value = {this.state.email}
+            />
+            <Input 
+              placeholder='Date Modified' 
+            />
+            <Input 
+              placeholder='Date Created' 
+            /> 
+        </form>
       </div>
     );
   }
