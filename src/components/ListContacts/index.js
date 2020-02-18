@@ -33,7 +33,7 @@ class ListContacts extends Component {
         }
       }
     `
-
+      //
     this.setState({ loading: true }, () => {
       fetch('http://localhost:3001/', {
         method: 'POST',
