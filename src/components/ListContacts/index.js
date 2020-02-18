@@ -6,13 +6,12 @@ class ListContacts extends Component {
 
   state = {
     loading: false,
-    data: null
+    data: []
   }
 
   componentDidMount() {
     this.fetchData()
   }
-
 
   fetchData = () => {
     const query = `
@@ -36,7 +35,8 @@ class ListContacts extends Component {
       .then(res => {
         const result = res.json()
         .then(response => {
-          this.setState({ data: response})
+        
+          this.setState({ data: response.contacts})
           console.log(this.state.data)
         })
       })
@@ -47,7 +47,9 @@ class ListContacts extends Component {
   render() {
     return (
       <div className="App">
-        list contacts
+        {this.state.data.map(contact => {
+          return <h1>contact.name</h1>
+        })}
       </div>
     );
   }
