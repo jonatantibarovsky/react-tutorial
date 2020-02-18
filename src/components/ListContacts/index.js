@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import styled from 'styled-components'
+import { Link } from 'react-router-dom'
 
 const Contact = styled.div`
   display: flex;
@@ -56,7 +57,7 @@ class ListContacts extends Component {
     return (
       <div className="App">
         {this.state.data && this.state.data.map((contact) => {
-          return <Contact key={contact.id}>{contact.name} {contact.email}</Contact>
+          return <Link to={`/contact/${contact.id}`}><Contact key={contact.id}>{contact.name} {contact.email}</Contact></Link>
         })}
       </div>
     );
