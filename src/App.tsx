@@ -55,12 +55,6 @@ class App extends Component {
               <Button variant="outlined" color="primary">
                 <Link to="/contact/add">Add Contact</Link>
               </Button>
-              <Button variant="outlined" color="primary">
-                <Link to="/contact/delete">Delete Contact</Link>
-              </Button>
-              <Button variant="outlined" color="primary">
-                <Link to="/contact/edit">Edit Contact</Link>
-              </Button>
             </ul>
           </nav>
 
@@ -71,7 +65,7 @@ class App extends Component {
               <ListContacts />
             </Route>
             <Route path="/contact/edit">
-            <GetID value='edit'/>
+              <GetID value='edit'/>
             </Route>
             <Route path="/contact/delete">
               <DeleteContact />
@@ -81,7 +75,7 @@ class App extends Component {
             </Route>
             // /:id part recognized every string after the /
             <Route path="/contact/:id">
-              <GetID value='id'/>
+              <EditContact />
             </Route>
           </Switch>
         </div>

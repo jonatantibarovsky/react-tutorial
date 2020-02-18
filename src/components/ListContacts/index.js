@@ -6,25 +6,32 @@ import { Button } from '@material-ui/core'
 const Contact = styled.div`
   display: flex;
   border-radius: 3px;
-  padding: 0.5rem 0;
+  padding: 1rem;
+  width:100%;
   margin: 0.5rem 1rem;
-  width: 11rem;
-  background: lightblue;
   color: white;
   border: 2px solid white;
-  min-height: 40px;
+`
+
+const LeftSide = styled.div`
+  display: flex;
+`
+const RightSide = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items:center;
+  justify-content: space-between;
+  width:400px;
 `
 
 const Div = styled.div`
   display: flex;
-  border-radius: 3px;
-  padding: 0.5rem 0;
+  border-radius: 15px;
   margin: 0.5rem 1rem;
-  width: 320px;
   background: lightblue;
   color: white;
   border: 2px solid white;
-  min-height: 70px;
+  justify-content:space-around;
 `
 
 class ListContacts extends Component {
@@ -48,7 +55,7 @@ class ListContacts extends Component {
         }
       }
     `
-      //
+    //
     this.setState({ loading: true }, () => {
       fetch('http://localhost:3001/', {
         method: 'POST',
@@ -57,13 +64,13 @@ class ListContacts extends Component {
         },
         body: JSON.stringify({ query })
       })
-      .then(res => {
-        const result = res.json()
-        .then(response => {
-          this.setState({ data: response.data.contacts})
+        .then(res => {
+          const result = res.json()
+            .then(response => {
+              this.setState({ data: response.data.contacts })
+            })
         })
-      })
-      .catch(error => console.log(error))
+        .catch(error => console.log(error))
     })
   }
 
@@ -86,13 +93,13 @@ class ListContacts extends Component {
           }
         })
       })
-      .then(res => {
-        res.json()
-        .then(response => {
-          this.setState({ data: response.data.contacts})
+        .then(res => {
+          res.json()
+            .then(response => {
+              this.setState({ data: response.data.contacts })
+            })
         })
-      })
-      .catch(error => console.log(error))
+        .catch(error => console.log(error))
     })
 
     this.fetchData()
@@ -101,18 +108,24 @@ class ListContacts extends Component {
   render() {
     return (
       <div className="App">
-        {this.state.data && this.state.data.map((contact) => {
-          return <Div>
-            <Contact key={contact.id}>{contact.name} {contact.email}</Contact>
-            <Link key={contact.id} to={`/contact/${contact.id}`}>
-              <Button>View</Button>
-            </Link>
-            <Link key={contact.id} to={`/contact/edit`}>
-              <Button>Edit</Button>
-            </Link>
-              <Button onClick={() => this.deleteContact(contact.id)}>Delete</Button>
-            </Div>
-          
+        {this.state.data && this.state.data.map((contact, i) => {
+          return <Div key={i}>
+            <LeftSide>
+              <Contact >{contact.name} {contact.email}</Contact>
+            </LeftSide>
+            <RightSide>
+              <Link to={`/contact/${contact.id}`}>
+                <Button variant="outlined" color="secondary">View</Button>
+              </Link>
+              <Link to={`/contact/edit/${contact.id}`}>
+                <Button variant="outlined" color="secondary">Edit</Button>
+              </Link>
+              <Link>
+                <Button variant="outlined" color="secondary" onClick={() => this.deleteContact(contact.id)}>Delete</Button>
+              </Link>
+            </RightSide>
+          </Div>
+
         })}
       </div>
     );

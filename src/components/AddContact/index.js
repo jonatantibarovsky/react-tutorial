@@ -1,13 +1,32 @@
 import React, { Component } from "react";
 import { Input, Button } from '@material-ui/core';
 import { Link } from 'react-router-dom'
+import styled from 'styled-components'
+
+const Div = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content:space-around;
+  margin:0 auto;
+  width:30%;
+`
+
+const Success = styled.div`
+
+`
+
+const Failure = styled.div`
+
+`
 
 class AddContact extends Component {
 
   state = {
     loading: false,
     name: "",
-    email: ""
+    email: "",
+    success: null,
+    failure: null
   }
 
   // https://graphql.org/graphql-js/mutations-and-input-types/
@@ -40,9 +59,15 @@ class AddContact extends Component {
           }
         })
       })
-      .then(res => res.json())
-      .then(data => console.log(data))
-      .catch(error => console.log(error))
+        .then(res => res.json())
+        .then(data => {
+          console.log(data)
+          this.setState({ success: true })
+        })
+        .catch(error => {
+          console.log(error)
+          this.setState({ failure: true, error })
+        })
     })
   }
 
@@ -61,25 +86,27 @@ class AddContact extends Component {
 
 
   render() {
+    const { success, failure } = this.state
     return (
-      <div className="App">
-        <form>
-            <Input 
-              placeholder='Contact Name' 
-              onChange = {(e) => this.handleChange(e, 'name')}
-            />
-            <Input 
-              placeholder='Email' 
-              onChange = {(e) => this.handleChange(e, 'email')}
-            />
-        </form>
-        
-          <Button onClick = {this.createContact}>
-            Add contact
-          </Button>
-        
-        
-      </div>
+      <Div>
+        <Input
+          placeholder='Contact Name'
+          onChange={(e) => this.handleChange(e, 'name')}
+        />
+        <Input
+          placeholder='Email'
+          onChange={(e) => this.handleChange(e, 'email')}
+        />
+        <Button onClick={this.createContact}>
+          Add contact
+        </Button>
+        {
+          success && <Success>Contact successfully added.</Success>
+        }
+        {
+          failure && <Failure>${this.state.error}</Failure>
+        }
+      </Div>
     );
   }
 }
