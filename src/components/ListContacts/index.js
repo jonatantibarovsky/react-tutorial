@@ -11,6 +11,7 @@ const Contact = styled.div`
   background: lightblue;
   color: white;
   border: 2px solid white;
+  min-height: 40px;
 `
 
 class ListContacts extends Component {
@@ -57,7 +58,7 @@ class ListContacts extends Component {
     return (
       <div className="App">
         {this.state.data && this.state.data.map((contact) => {
-          return <Link to={`/contact/${contact.id}`}><Contact key={contact.id}>{contact.name} {contact.email}</Contact></Link>
+          return <Link key={contact.id} to={`/contact/${contact.id}`}><Contact key={contact.id}>{contact.name} {contact.email}</Contact></Link>
         })}
       </div>
     );
