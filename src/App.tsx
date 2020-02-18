@@ -71,7 +71,7 @@ class App extends Component {
               <ListContacts />
             </Route>
             <Route path="/contact/edit">
-              <EditContact />
+            <GetID value='edit'/>
             </Route>
             <Route path="/contact/delete">
               <DeleteContact />
@@ -81,7 +81,7 @@ class App extends Component {
             </Route>
             // /:id part recognized every string after the /
             <Route path="/contact/:id">
-              <GetID />
+              <GetID value='id'/>
             </Route>
           </Switch>
         </div>

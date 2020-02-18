@@ -1,11 +1,15 @@
 import React, { Component } from "react";
-import ListContacts from '../ListContacts'
+import { Input, Button } from '@material-ui/core'
 
 class EditContact extends Component {
-  state = {
-    loading: false,
-    name: "",
-    email: ""
+
+  constructor(props) {
+    super(props)
+    this.state = {
+      loading: false,
+      name: '',
+      email: ''
+    }
   }
 
   componentDidMount() {
@@ -50,38 +54,48 @@ class EditContact extends Component {
 
   fetchData = () => {
     const query = `
-      query {
-        contacts {
-          id
+      query contact($id: ID) {
+        contact(id: $id) {
           name
           email
         }
       }
     `
-      //
     this.setState({ loading: true }, () => {
-      fetch('http://localhost:3001/', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({ query })
-      })
-      .then(res => {
-        const result = res.json()
-        .then(response => {
-          this.setState({ data: response.data.contacts})
+        fetch('http://localhost:3001/', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+             query,
+             variables: {
+               id: this.props.id
+             }
+          })
         })
+        .then(res => {
+          res.json()
+          .then(response => {
+            /* this.setState({
+              name: response.data.contact.name,
+              email: response.data.contact.email
+            }) */
+            //console.log(this.state.data)
+          })
+        })
+        .catch(error => console.log(error))
       })
-      .catch(error => console.log(error))
-    })
   }
-
 
   render() {
     return (
       <div className="App">
-        <ListContacts />
+        <Input value={this.state.name}/>
+        <Input value={this.state.email}/>
+        <Button onClick={this.updateContact}>
+          Update Contact
+        </Button>
       </div>
     );
   }
