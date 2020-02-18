@@ -1,3 +1,24 @@
 {
-  "contacts": []
+  "contacts": [
+    {
+      "name": "asd jasn djas",
+      "email": "ads",
+      "id": "SU0ou_GXYr47o0j9b2xvc"
+    },
+    {
+      "name": "test test",
+      "email": "test",
+      "id": "AIUMgABzrpjOsFOT_PMf7"
+    },
+    {
+      "name": "",
+      "email": "",
+      "id": "uYvMUIkzWSOIgDcJTrVP2"
+    },
+    {
+      "name": "aijsad",
+      "email": "ijaijsd",
+      "id": "5YaGGsI-zJnjA9BWl8QSR"
+    }
+  ]
 }

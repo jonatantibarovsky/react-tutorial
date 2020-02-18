@@ -7,12 +7,12 @@ function ViewContact() {
   console.log(id)
 
   const [loading, setLoading] = useState(false)
-  const [data, setData] = useState(null)
+  const [data, setData] = useState({})
 
   useEffect(() => {
     const query = `
-      query {
-        contact(id :)  {
+      query contact($id: ID) {
+        contact(id: $id) {
           name
           email
         }
@@ -25,13 +25,20 @@ function ViewContact() {
         headers: {
           'Content-Type': 'application/json'
         },
-        body: JSON.stringify({ query })
+        body: JSON.stringify({
+          query,
+          variables: {
+            id: id
+          }
+        })
     })
     .then(res => {
       const result = res.json()
       .then(response => {
-        setData(response)
-        console.log(response)
+        // setData doesnt do what it needs to do
+        setData(response.data.data)
+        // prints {}
+        console.log(data)
       })
     })
     .catch(error => console.log(error))

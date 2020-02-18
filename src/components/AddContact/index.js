@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { Input, Button } from '@material-ui/core';
+import { Link } from 'react-router-dom'
 
 class AddContact extends Component {
 
@@ -72,7 +73,12 @@ class AddContact extends Component {
               onChange = {(e) => this.handleChange(e, 'email')}
             />
         </form>
-        <Button onClick = {this.createContact}>Click me</Button>
+        <Link to>
+          <Button onClick = {this.createContact}>
+            Click me
+          </Button>
+        </Link>
+        
       </div>
     );
   }
