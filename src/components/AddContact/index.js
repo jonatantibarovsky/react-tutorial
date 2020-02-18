@@ -75,7 +75,7 @@ class AddContact extends Component {
         </form>
         
           <Button onClick = {this.createContact}>
-            Click me
+            Add contact
           </Button>
         
         

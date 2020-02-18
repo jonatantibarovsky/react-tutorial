@@ -6,7 +6,7 @@ import EditContact from './components/EditContact';
 import AddContact from './components/AddContact';
 import ViewContacts from './components/ViewContact';
 import DeleteContact from './components/DeleteContact';
-import GetID from './components/ViewContact/GetID'
+import GetID from './components/containers/GetID'
 import Button from '@material-ui/core/Button';
 import {
   BrowserRouter as Router,

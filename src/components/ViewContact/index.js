@@ -51,7 +51,7 @@ class ViewContact extends Component {
           })
         })
         .then(res => {
-          const result = res.json()
+          res.json()
           .then(response => {
             this.setState({
               data: response.data.contact

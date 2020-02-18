@@ -40,13 +40,11 @@ class DeleteContact extends Component {
     }
   
     deleteContact = (id) => {
-
         const query = `
             mutation deleteContact($id: ID) {
                 deleteContact(id: $id)
             }
         `
-        
         this.setState({ loading: true }, () => {
           fetch('http://localhost:3001/', {
             method: 'POST',

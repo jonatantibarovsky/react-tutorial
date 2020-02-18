@@ -1,7 +1,7 @@
 import React from 'react'
 import { useParams } from 'react-router-dom'
 
-import ViewContact from '../index'
+import ViewContact from '../../ViewContact/index'
 
 const GetID = () => {
 
