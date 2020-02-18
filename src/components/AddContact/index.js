@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Input } from '@material-ui/core';
+import { Input, Button } from '@material-ui/core';
 
 class AddContact extends Component {
 
@@ -10,7 +10,7 @@ class AddContact extends Component {
   }
 
   // https://graphql.org/graphql-js/mutations-and-input-types/
-  fetchData = () => {
+  createContact = () => {
     const query = `
       mutation addContact($contact: InputContact) {
         addContact(contact: $contact) {
@@ -45,12 +45,17 @@ class AddContact extends Component {
     })
   }
 
-  handleChange = (event, a) => {
-    console.log(event, a)
-    this.setState({
-      value: event.target.value
-    })
-    console.log(this.state)
+  handleChange = (event, value) => {
+    console.log(event, value)
+    if (value == 'name') {
+      this.setState({
+        name: event.target.value
+      })
+    } else if (value == 'email') {
+      this.setState({
+        email: event.target.value
+      })
+    }
   }
 
 
@@ -60,19 +65,14 @@ class AddContact extends Component {
         <form>
             <Input 
               placeholder='Contact Name' 
-              onChange = {(e) => this.handleChange(e, 'asd')}
+              onChange = {(e) => this.handleChange(e, 'name')}
             />
             <Input 
               placeholder='Email' 
-              onChange = {this.handleChange}
+              onChange = {(e) => this.handleChange(e, 'email')}
             />
-            <Input 
-              placeholder='Date Modified' 
-            />
-            <Input 
-              placeholder='Date Created' 
-            /> 
         </form>
+        <Button onClick = {this.createContact}>Click me</Button>
       </div>
     );
   }
