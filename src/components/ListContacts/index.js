@@ -1,6 +1,16 @@
 import React, { Component } from "react";
+import styled from 'styled-components'
 
-require('isomorphic-fetch')
+const Contact = styled.div`
+  display: flex;
+  border-radius: 3px;
+  padding: 0.5rem 0;
+  margin: 0.5rem 1rem;
+  width: 11rem;
+  background: lightblue;
+  color: white;
+  border: 2px solid white;
+`
 
 class ListContacts extends Component {
 
@@ -35,9 +45,7 @@ class ListContacts extends Component {
       .then(res => {
         const result = res.json()
         .then(response => {
-        
-          this.setState({ data: response.contacts})
-          console.log(this.state.data)
+          this.setState({ data: response.data.contacts})
         })
       })
       .catch(error => console.log(error))
@@ -47,8 +55,8 @@ class ListContacts extends Component {
   render() {
     return (
       <div className="App">
-        {this.state.data.map(contact => {
-          return <h1>contact.name</h1>
+        {this.state.data && this.state.data.map((contact) => {
+          return <Contact key={contact.id}>{contact.name} {contact.email}</Contact>
         })}
       </div>
     );
