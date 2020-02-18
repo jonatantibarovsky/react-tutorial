@@ -1,15 +1,34 @@
 import React, { Component, useState, useEffect } from "react";
-import { useParams } from "react-router";
+import styled from 'styled-components'
 
+const Contact = styled.div`
+  display: flex;
+  border-radius: 3px;
+  padding: 0.5rem 0;
+  margin: 0.5rem 1rem;
+  width: 11rem;
+  background: lightblue;
+  color: white;
+  border: 2px solid white;
+  min-height: 40px;
+`
 
-function ViewContact() {
-  const { id } = useParams()
-  console.log(id)
+class ViewContact extends Component {
 
-  const [loading, setLoading] = useState(false)
-  const [data, setData] = useState({})
+  constructor(props) {
+    super(props)
 
-  useEffect(() => {
+    this.state = {
+      loading: false,
+      data: {}
+    }
+  }
+
+  componentDidMount() {
+    this.fetchData()
+  }
+
+  fetchData = () => {
     const query = `
       query contact($id: ID) {
         contact(id: $id) {
@@ -18,38 +37,42 @@ function ViewContact() {
         }
       }
     `
-    setLoading(true)
-
-    fetch('http://localhost:3001/', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-          query,
-          variables: {
-            id: id
-          }
+    this.setState({ loading: true }, () => {
+        fetch('http://localhost:3001/', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+             query,
+             variables: {
+               id: this.props.id
+             }
+          })
         })
-    })
-    .then(res => {
-      const result = res.json()
-      .then(response => {
-        // setData doesnt do what it needs to do
-        setData(response.data.data)
-        // prints {}
-        console.log(data)
+        .then(res => {
+          const result = res.json()
+          .then(response => {
+            this.setState({
+              data: response.data.contact
+            })
+            //console.log(this.state.data)
+          })
+        })
+        .catch(error => console.log(error))
       })
-    })
-    .catch(error => console.log(error))
-  }, []) 
-
-    return (
-      <div className="App">
-        hi
+  }
+  
+  render() {
+    return(
+      <div>
+        <Contact>
+          {this.state.data.name}
+          {this.state.data.email}
+        </Contact>
       </div>
     )
-  
+  }
 }
 
 export default ViewContact;

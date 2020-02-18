@@ -73,11 +73,11 @@ class AddContact extends Component {
               onChange = {(e) => this.handleChange(e, 'email')}
             />
         </form>
-        <Link to>
+        
           <Button onClick = {this.createContact}>
             Click me
           </Button>
-        </Link>
+        
         
       </div>
     );

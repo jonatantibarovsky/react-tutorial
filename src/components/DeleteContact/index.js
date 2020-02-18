@@ -105,14 +105,15 @@ class DeleteContact extends Component {
       return (
         <div className="App">
           {this.state.data && this.state.data.map((contact) => {
-          return <Div>
+            console.log(contact.id)
+          return <Div key={contact.id}>
                   <Link key={contact.id} to={`/contact/${contact.id}`}>
                     <Contact key={contact.id}>
                       {contact.name}
                       {contact.email}
                     </Contact>
                   </Link>
-                  <Button onClick={() => this.deleteContact(contact.id)}>
+                  <Button key={contact.id} onClick={() => this.deleteContact(contact.id)}>
                     Delete
                   </Button>
                 </Div>
