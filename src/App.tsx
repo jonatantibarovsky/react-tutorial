@@ -15,35 +15,8 @@ import {
 } from "react-router-dom";
 
 class App extends Component {
-  state = {
-    feature: 'list'
-  };
   render() {
-    const { feature } = this.state
     return (
-      /*
-  <Button variant="contained" color="primary" onClick={() => this.setState({feature:'list'})}>List Contacts</Button>
-  {
-    feature == 'list' && <ListContacts />
-  }
-  <Button variant="contained" color="primary" onClick={() => this.setState({feature:'view'})}>View Contacts</Button>
-  {
-    feature == 'view' && <ViewContacts />
-  }
-  {
-    feature == 'add' && <AddContact />
-  }
-  <Button variant="contained" color="primary" onClick={() => this.setState({feature:'delete'})}>Delete Contact</Button>
-  {
-    feature == 'delete' && <DeleteContact />
-  }
-  <Button variant="contained" color="primary" onClick={() => this.setState({feature:'edit'})}>Edit Contact</Button>
-  {
-    feature == 'edit' && <EditContact />
-  }
-  /
-  */
-
       <Router>
         <div>
           <nav>
@@ -56,9 +29,6 @@ class App extends Component {
               </Button>
             </ul>
           </nav>
-
-          {/* A <Switch> looks through its children <Route>s and
-            renders the first one that matches the current URL. */}
           <Switch>
             <Route path="/contact/all">
               <ListContacts />
@@ -72,7 +42,6 @@ class App extends Component {
             <Route path="/contact/:id">
               <ViewContact />
             </Route>
-            // /:id part recognized every string after the /
             <Route path="/contact/edit/:id">
               <EditContact />
             </Route>
