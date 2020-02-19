@@ -18,12 +18,7 @@ const Contact = styled.div`
 class ViewContact extends Component {
   state = {
     loading: false,
-    data: {
-      name: null,
-      email: null,
-      created: '',
-      modified: '',
-    }
+    data: {}
   }
 
   componentDidMount() {
