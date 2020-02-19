@@ -3,7 +3,6 @@ import { Input, Button } from '@material-ui/core'
 import styled from 'styled-components'
 import { withRouter } from "react-router";
 
-
 const Div = styled.div`
   display: flex;
   flex-direction: column;
@@ -28,6 +27,7 @@ class EditContact extends Component {
       loading: false,
       name: '',
       email: '',
+      error: '',
       success: null,
       failure: null
     }
@@ -39,17 +39,19 @@ class EditContact extends Component {
 
   // https://graphql.org/graphql-js/mutations-and-input-types/
   updateContact = () => {
+    const lastModified = new Date().toString()
     const query = `
       mutation updateContact($contact: InputContact) {
         updateContact(contact: $contact) {
           id
           name
           email
+          // add last modified here
         }
       }
     `
     const { name, email } = this.state
-
+      // please remove all calls console.logs once you are done. use VS Code's Search in directory feature to do this 
     this.setState({ loading: true }, () => {
       console.log('fetching')
       fetch('http://localhost:3001/', {
@@ -97,32 +99,36 @@ class EditContact extends Component {
         body: JSON.stringify({
           query,
           variables: {
-            id: this.props.id
+            id: this.props.match.params.id
           }
         })
       })
         .then(res => {
           res.json()
             .then(response => {
-              /* this.setState({
+              console.log(response)
+              this.setState({
                 name: response.data.contact.name,
-                email: response.data.contact.email
-              }) */
-              //console.log(this.state.data)
+                email: response.data.contact.email,
+                // last modified
+                // created
+                success: true
+              })
             })
         })
-        .catch(error => console.log(error))
+        .catch(error => {
+          console.log(error)
+          this.setState({ failure: true, error })
+        })
     })
   }
 
   render() {
-    const { success, failure } = this.state
-    console.log(this.props)
-    // call graphql to fetch based on 
+    const { success, failure, error, name, email } = this.state
     return (
       <Div>
-        <Input value={this.state.name} />
-        <Input value={this.state.email} />
+        <Input value={name} />
+        <Input value={email} />
         <Button onClick={this.updateContact}>
           Update Contact
         </Button>
@@ -130,7 +136,7 @@ class EditContact extends Component {
           success && <Success>Contact successfully updated.</Success>
         }
         {
-          failure && <Failure>${this.state.error}</Failure>
+          failure && <Failure>${error}</Failure>
         }
       </Div>
     );

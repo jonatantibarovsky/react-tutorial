@@ -1,8 +1,10 @@
 import React, { Component, useState, useEffect } from "react";
 import styled from 'styled-components'
+import { withRouter } from "react-router";
 
 const Contact = styled.div`
   display: flex;
+  flex-direction: column;
   border-radius: 3px;
   padding: 0.5rem 0;
   margin: 0.5rem 1rem;
@@ -14,13 +16,11 @@ const Contact = styled.div`
 `
 
 class ViewContact extends Component {
-
-  constructor(props) {
-    super(props)
-
-    this.state = {
-      loading: false,
-      data: {}
+  state = {
+    loading: false,
+    data: {
+      name: null,
+      email: null
     }
   }
 
@@ -38,41 +38,55 @@ class ViewContact extends Component {
       }
     `
     this.setState({ loading: true }, () => {
-        fetch('http://localhost:3001/', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json'
-          },
-          body: JSON.stringify({
-             query,
-             variables: {
-               id: this.props.id
-             }
-          })
+      fetch('http://localhost:3001/', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          query,
+          variables: {
+            id: this.props.match.params.id
+          }
         })
+      })
         .then(res => {
           res.json()
-          .then(response => {
-            this.setState({
-              data: response.data.contact
+            .then(response => {
+              console.log(response)
+              this.setState({
+                // modified and created come through here
+                data: response.data.contact
+              })
             })
-            //console.log(this.state.data)
-          })
         })
-        .catch(error => console.log(error))
-      })
+        .catch(error => {
+          console.log(error)
+        })
+    })
   }
-  
+
   render() {
-    return(
+    const { name, email, modified, created } = this.state.data
+    return (
       <div>
         <Contact>
-          {this.state.data.name}
-          {this.state.data.email}
+          <div>
+            Name: {name}
+          </div>
+          <div>
+            Email: {email}
+          </div>
+          <div>
+            Date Modified: {modified}
+          </div>
+          <div>
+            Date Created: {created}
+          </div>
         </Contact>
       </div>
     )
   }
 }
 
-export default ViewContact;
+export default withRouter(ViewContact);

@@ -4,9 +4,8 @@ import "./App.css";
 import ListContacts from './components/ListContacts';
 import EditContact from './components/EditContact';
 import AddContact from './components/AddContact';
-import ViewContacts from './components/ViewContact';
+import ViewContact from './components/ViewContact';
 import DeleteContact from './components/DeleteContact';
-import GetID from './components/containers/GetID'
 import Button from '@material-ui/core/Button';
 import {
   BrowserRouter as Router,
@@ -64,17 +63,17 @@ class App extends Component {
             <Route path="/contact/all">
               <ListContacts />
             </Route>
-            <Route path="/contact/edit">
-              <GetID value='edit'/>
-            </Route>
             <Route path="/contact/delete">
               <DeleteContact />
             </Route>
             <Route path="/contact/add">
               <AddContact />
             </Route>
-            // /:id part recognized every string after the /
             <Route path="/contact/:id">
+              <ViewContact />
+            </Route>
+            // /:id part recognized every string after the /
+            <Route path="/contact/edit/:id">
               <EditContact />
             </Route>
           </Switch>

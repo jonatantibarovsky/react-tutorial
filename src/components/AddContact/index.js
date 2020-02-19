@@ -43,6 +43,8 @@ class AddContact extends Component {
     const { name, email } = this.state
 
     this.setState({ loading: true }, () => {
+      const created = new Date().toString()
+      const modified = new Date().toString()
       console.log('fetching')
       fetch('http://localhost:3001/', {
         method: 'POST',
@@ -55,6 +57,9 @@ class AddContact extends Component {
             contact: {
               name,
               email
+              // pass date and modified here like
+              // created
+              // modified
             }
           }
         })

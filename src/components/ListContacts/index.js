@@ -111,7 +111,7 @@ class ListContacts extends Component {
         {this.state.data && this.state.data.map((contact, i) => {
           return <Div key={i}>
             <LeftSide>
-              <Contact >{contact.name} {contact.email}</Contact>
+              <Contact >{contact.name}</Contact>
             </LeftSide>
             <RightSide>
               <Link to={`/contact/${contact.id}`}>
