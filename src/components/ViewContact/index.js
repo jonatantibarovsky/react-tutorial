@@ -8,7 +8,7 @@ const Contact = styled.div`
   border-radius: 3px;
   padding: 0.5rem 0;
   margin: 0.5rem 1rem;
-  width: 11rem;
+  width: 40rem;
   background: lightblue;
   color: white;
   border: 2px solid white;
@@ -52,10 +52,11 @@ class ViewContact extends Component {
         .then(res => {
           res.json()
             .then(response => {
-              console.log(response)
+              console.log(response.data.contact)
               this.setState({
                 data: response.data.contact
               })
+              console.log(this.state.data)
             })
         })
         .catch(error => {

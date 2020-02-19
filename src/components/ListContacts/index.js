@@ -120,7 +120,7 @@ class ListContacts extends Component {
               <Link to={`/contact/edit/${contact.id}`}>
                 <Button variant="outlined" color="secondary">Edit</Button>
               </Link>
-              <Link>
+              <Link to={'/contact/all'}>
                 <Button variant="outlined" color="secondary" onClick={() => this.deleteContact(contact.id)}>Delete</Button>
               </Link>
             </RightSide>

@@ -37,6 +37,8 @@ class AddContact extends Component {
           id
           name
           email
+          created
+          modified
         }
       }
     `
@@ -56,7 +58,9 @@ class AddContact extends Component {
           variables: {
             contact: {
               name,
-              email
+              email,
+              modified,
+              created
             }
           }
         })
