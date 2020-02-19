@@ -35,8 +35,6 @@ class EditContact extends Component {
 
   componentDidMount() {
     this.fetchData()
-    document.getElementById('name').value = this.state.name
-    document.getElementById('email').value = this.state.name
   }
 
   // https://graphql.org/graphql-js/mutations-and-input-types/
@@ -126,11 +124,11 @@ class EditContact extends Component {
   }
 
   render() {
-    const { success, failure, error, name, email } = this.state
+    const { success, failure, error } = this.state
     return (
       <Div>
-        <Input id='name'/>
-        <Input id='email'/>
+        <Input placeholder='Name' />
+        <Input placeholder='Email' />
         <Button onClick={this.updateContact}>
           Update Contact
         </Button>
