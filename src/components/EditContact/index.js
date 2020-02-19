@@ -35,18 +35,20 @@ class EditContact extends Component {
 
   componentDidMount() {
     this.fetchData()
+    document.getElementById('name').value = this.state.name
+    document.getElementById('email').value = this.state.name
   }
 
   // https://graphql.org/graphql-js/mutations-and-input-types/
   updateContact = () => {
-    const lastModified = new Date().toString()
+    const modified = new Date().toString()
     const query = `
       mutation updateContact($contact: InputContact) {
         updateContact(contact: $contact) {
           id
           name
           email
-          // add last modified here
+          modified
         }
       }
     `
@@ -64,7 +66,8 @@ class EditContact extends Component {
           variables: {
             contact: {
               name,
-              email
+              email,
+              modified
             }
           }
         })
@@ -91,6 +94,7 @@ class EditContact extends Component {
       }
     `
     this.setState({ loading: true }, () => {
+
       fetch('http://localhost:3001/', {
         method: 'POST',
         headers: {
@@ -110,8 +114,6 @@ class EditContact extends Component {
               this.setState({
                 name: response.data.contact.name,
                 email: response.data.contact.email,
-                // last modified
-                // created
                 success: true
               })
             })
@@ -127,8 +129,8 @@ class EditContact extends Component {
     const { success, failure, error, name, email } = this.state
     return (
       <Div>
-        <Input value={name} />
-        <Input value={email} />
+        <Input id='name'/>
+        <Input id='email'/>
         <Button onClick={this.updateContact}>
           Update Contact
         </Button>

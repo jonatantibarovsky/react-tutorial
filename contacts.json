@@ -1,3 +1,11 @@
 {
-  "contacts": []
+  "contacts": [
+    {
+      "name": "test",
+      "email": "test",
+      "created": "Wed Feb 19 2020 15:43:08 GMT+0000 (Greenwich Mean Time)",
+      "modified": "Wed Feb 19 2020 15:43:08 GMT+0000 (Greenwich Mean Time)",
+      "id": "UaYK75ZLG13sU5PCXt6IW"
+    }
+  ]
 }
