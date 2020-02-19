@@ -39,10 +39,10 @@ class App extends Component {
             <Route path="/contact/add">
               <AddContact />
             </Route>
-            <Route path="/contact/:id">
+            <Route exact path="/contact/:id">
               <ViewContact />
             </Route>
-            <Route path="/contact/edit/:id">
+            <Route exact path="/contact/edit/:id">
               <EditContact />
             </Route>
           </Switch>

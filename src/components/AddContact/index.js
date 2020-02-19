@@ -37,6 +37,8 @@ class AddContact extends Component {
           id
           name
           email
+          created
+          modified
         }
       }
     `
@@ -56,10 +58,9 @@ class AddContact extends Component {
           variables: {
             contact: {
               name,
-              email
-              // pass date and modified here like
-              // created
-              // modified
+              email,
+              created,
+              modified
             }
           }
         })

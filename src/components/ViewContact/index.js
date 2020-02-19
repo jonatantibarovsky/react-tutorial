@@ -20,7 +20,9 @@ class ViewContact extends Component {
     loading: false,
     data: {
       name: null,
-      email: null
+      email: null,
+      created: '',
+      modified: '',
     }
   }
 
@@ -34,6 +36,8 @@ class ViewContact extends Component {
         contact(id: $id) {
           name
           email
+          created
+          modified
         }
       }
     `
@@ -55,7 +59,6 @@ class ViewContact extends Component {
             .then(response => {
               console.log(response)
               this.setState({
-                // modified and created come through here
                 data: response.data.contact
               })
             })
